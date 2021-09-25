@@ -2,6 +2,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { Button, Grid } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+
+
 class ConfigDropdown extends React.Component {
 
     // The "form" that shows when clicking a MapObject
@@ -29,9 +33,9 @@ class ConfigDropdown extends React.Component {
         fetch('/get_config', requestOptions)
                 .then(response => response.json())
                 .then(data => this.setState({
-                    formId: data.id,
-                    formTitle: data.title,
-                    formLocation: data.location
+                    formId: data.form_id,
+                    formTitle: data.form_title,
+                    formLocation: data.form_location
                 }));
     }
 
@@ -66,6 +70,7 @@ class ConfigDropdown extends React.Component {
 
         // The actual form that will show to the user
         return (
+            
             <form onSubmit={submitForm}>
                 <Grid container alignItems="center" justify="center" direction="column" 
                 style = {{zIndex: 100}}>

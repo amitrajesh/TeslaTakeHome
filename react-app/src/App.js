@@ -35,8 +35,6 @@ function App() {
         zIndex: 100}}>
           <MapObject id ={3} />
       </div>
-
-      // The svg map that each MapObject is on top of
       <div className="mapWrapper" style={{
          position: "absolute",
          left: "0%",
