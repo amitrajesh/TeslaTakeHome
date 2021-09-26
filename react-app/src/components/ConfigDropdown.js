@@ -43,6 +43,7 @@ class ConfigDropdown extends React.Component {
     render() {
 
         const submitForm = (event) => {
+            event.preventDefault()
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -105,7 +106,7 @@ class ConfigDropdown extends React.Component {
                         />
                     </Grid>
 
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button variant="contained" color="primary" onClick={()=> {document.body.click();}} type="submit">
                     Change Info
                     </Button>
                 </Grid>

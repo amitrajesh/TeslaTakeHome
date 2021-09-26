@@ -3,8 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, emit
 import time
 import random
+import threading
+
 app = Flask(__name__, template_folder='templates')
-app.config['SECRET_KEY'] = 'secret!'
 db = SQLAlchemy(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -15,10 +16,6 @@ class ObjectConfig(db.Model):
     form_title = db.Column(db.String(80), nullable=False)
     form_location = db.Column(db.String(80), nullable=False)
 
-    def __repr__(self):
-        return '<User %r>' % self.obj_id
-
-
 # Using SQlAlchemy, we create a SQL database with the default values for each of the 4 MapObjects
 db.create_all()
 db.session.add(ObjectConfig(true_id=0, form_id=0, form_title="Node 0", form_location="LA"))
@@ -26,7 +23,6 @@ db.session.add(ObjectConfig(true_id=1, form_id=1, form_title="Node 1", form_loca
 db.session.add(ObjectConfig(true_id=2, form_id=2, form_title="Node 2", form_location="Dallas"))
 db.session.add(ObjectConfig(true_id=3, form_id=3, form_title="Node 3", form_location="Miami"))
 db.session.commit()
-
 
 @app.route("/")
 def my_index():
@@ -55,20 +51,31 @@ def change_config():
 
     return "success"
 
+
+
+def emit_data():
+    while not stop_event.is_set():
+        socketio.emit("data", random.randint(1, 100))
+        socketio.sleep(0.5)
+
 # Connection test message (when frontend first connects)
 @socketio.on('connect')
 def initialization():
-    emit('connection', 'test')
+    print("Connecting")
+    global stop_event
+    stop_event = threading.Event()
+    data_thread = threading.Thread(target=emit_data, daemon=True)
+    data_thread.start()
 
-# Returns a random number when frontend requests data
-@socketio.on('get_data')
-def send_data():
-    emit('data', random.random())
+@socketio.on('disconnect')
+def disconnection():
+    print("Setting stop event")
+    stop_event.set()
 
-socketio.run(app)
+
 
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, debug=True)
 
 
     

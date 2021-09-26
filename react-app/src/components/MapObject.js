@@ -23,7 +23,7 @@ class MapObject extends React.Component {
         
         return [
         // OverlayTrigger from boostrap takes care of form placement
-        <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+        <OverlayTrigger trigger="click" rootClose={true} placement="right" dataTrigger="focus" overlay={popover}>
             <RoomIcon />
         </OverlayTrigger>
         ]

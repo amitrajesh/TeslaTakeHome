@@ -9,35 +9,41 @@ class RealTimeData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            socket: io(),
             realTimeData: null,
         }
       }
     intervalId = null;
+    socket = null;
 
 
     componentDidMount() {
         // When mounted, we connect to the backend with socket and set up a timer function to get data
-        this.state.socket.on("connect", () => {
-            console.log(this.state.socket.connected); // x8WIv7-mJelg7on_ALbx
-            this.intervalId = setInterval(() => {
-                console.log(this.state);
-                this.state.socket.emit("get_data");
-                this.state.socket.on("data", (num) => {
-                    this.setState({realTimeData: num});
-                });
-            }, 500);
-        });
+        // this.state.socket.on("connect", () => {
+        //     console.log(this.state.socket.connected); // x8WIv7-mJelg7on_ALbx
+        //     this.intervalId = setInterval(() => {
+        //         this.state.socket.on("data", (num) => {
+        //             console.log(num);
+        //             this.setState({realTimeData: num});
+        //         });
+        //     }, 500);
+        // });
+        this.socket = io();
+
+        this.intervalId = setInterval(() => {
+            this.socket.on("data", (num) => {
+                console.log(num);
+                this.setState({realTimeData: num});
+            });
+        }, 500);
     }
 
     // End the data fetching when the component is shut down.
     componentWillUnmount() {
+        this.socket.close();
         clearInterval(this.intervalId);
     }
 
     render() {
-
-        
         return (
             <div className="test">
                 <p1> {this.state.realTimeData} </p1>
