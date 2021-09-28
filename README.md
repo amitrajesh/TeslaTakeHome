@@ -21,7 +21,7 @@ Make sure npm and pip are installed on your computer. Then, go to the react-app 
 >npm install  
 >npm start
 
-In a sperate terminal, navigate to the flask directory and run:  
+In a seperate terminal, navigate to the flask directory and run:  
 >pip install -r requirements.txt  
 >flask run
 
