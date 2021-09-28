@@ -1,0 +1,5 @@
+Flask==2.0.1
+flask_socketio==5.1.1
+flask_sqlalchemy==2.5.1
+python-dotenv
+flask-cors

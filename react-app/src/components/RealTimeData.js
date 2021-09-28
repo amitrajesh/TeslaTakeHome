@@ -1,11 +1,9 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import { Button, Grid } from '@material-ui/core';
-import TextField from '@mui/material/TextField';
 import io from 'socket.io-client';
+
 class RealTimeData extends React.Component {
 
-    // The real-time data component for a MapObject; this uses socket.io to continously get random numbers from Flask/
+    // The real-time data component for a MapObject; this uses socket.io to continously get random numbers
     constructor(props) {
         super(props);
         this.state = {
@@ -18,15 +16,6 @@ class RealTimeData extends React.Component {
 
     componentDidMount() {
         // When mounted, we connect to the backend with socket and set up a timer function to get data
-        // this.state.socket.on("connect", () => {
-        //     console.log(this.state.socket.connected); // x8WIv7-mJelg7on_ALbx
-        //     this.intervalId = setInterval(() => {
-        //         this.state.socket.on("data", (num) => {
-        //             console.log(num);
-        //             this.setState({realTimeData: num});
-        //         });
-        //     }, 500);
-        // });
         this.socket = io();
 
         this.intervalId = setInterval(() => {
@@ -45,9 +34,7 @@ class RealTimeData extends React.Component {
 
     render() {
         return (
-            <div className="test">
-                <p1> {this.state.realTimeData} </p1>
-            </div>
+            <h3 style={{margin: 0}}> Real Time Data: {this.state.realTimeData} </h3>
         );
 
     }
