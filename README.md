@@ -2,7 +2,7 @@
 Tesla take-home challenge by Amit Rajesh
 
 This application allows you to move a series of colorful icons across a map,
-view/change the icon configuration settings by double-clicking (which utilizes a local internal databse), and view sample real-time data being received by that icon using Websockets.
+view/change icon configuration settings (which utilizes a local internal database), and view sample real-time data (which utilizes Websockets).
 
 
 # Running:
