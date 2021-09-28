@@ -22,7 +22,7 @@ Make sure npm and pip are installed on your computer. Then, go to the react-app 
 >npm start
 
 In a sperate terminal, navigate to the flask directory and run:  
->pip install -r requirements.txt
+>pip install -r requirements.txt  
 >flask run
 
 Visit localhost:3000 to see the full application.
