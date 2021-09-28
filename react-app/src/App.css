@@ -1,11 +1,9 @@
 .App {
   text-align: center;
 }
+/* So that the configuration dropdown has proper priority */
 .popover {
   z-index: 100;
-}
-.tabs {
-  display:flex; flex-direction:row;
 }
 .App-logo {
   height: 40vmin;

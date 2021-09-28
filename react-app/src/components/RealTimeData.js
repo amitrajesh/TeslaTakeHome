@@ -20,7 +20,6 @@ class RealTimeData extends React.Component {
 
         this.intervalId = setInterval(() => {
             this.socket.on("data", (num) => {
-                console.log(num);
                 this.setState({realTimeData: num});
             });
         }, 500);
